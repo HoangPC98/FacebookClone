@@ -11,12 +11,12 @@ class AuthenController{
                 res.json({message: 'Đăng kí thất bại do trùng Username/Email/SĐT'});
             }
             else{
-                console.log('PostSignUp', req.body)
+                // console.log('PostSignUp', req.body)
 
                 const formData = req.body
                 const storeData = new UserModel(formData) // tạo ra 1 instance Schema Prodcut mới và đổ data vào Schema
                 storeData.save() // lưu lại vào Collection Account 
-                console.log('registed',req.body,storeData)
+                // console.log('registed',req.body,storeData)
                 res.send('<h2> Đăng kí thành công <a href="/login">   Đăng nhập ngay</a></h2>')
                 
             }
@@ -33,10 +33,10 @@ class AuthenController{
                 console.log('Login successful')
 
                 let userId = JSON.stringify(data._id).toString()
-                console.log('uid', userId)
+                // console.log('uid', userId)
 
                 userId = userId.split('"').join('') // xóa bỏ tất cả các kí tự " trong chuỗi
-                console.log('uid2', userId)
+                // console.log('uid2', userId)
                 
                 res.cookie(`uid`, userId).render('main', {data: data})
             }

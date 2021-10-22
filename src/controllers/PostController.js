@@ -48,7 +48,14 @@ class PostController{
                 } 
                 
                 console.log('newList', listLikeUser)
-                PostModel.findOneAndUpdate({_id: req.body.postId}, {reactNumber:{likeNumber: newLikeNumber }, reactDetail:{listLikeUser: listLikeUser}} ,data=>{})
+                PostModel.findOneAndUpdate(
+                    {_id: req.body.postId}, 
+                    { 
+                        "reactNumber.likeNumber": newLikeNumber , 
+                        "reactDetail.listLikeUser": listLikeUser
+                    },
+                    ()=>{console.log('success')
+                })
             })
             .catch(err =>{
                 console.log('ERROR Catched:',err)
@@ -68,7 +75,14 @@ class PostController{
                     return item != newChange
                 })
                 console.log('newLIST',listLikeUser)
-                PostModel.findOneAndUpdate({_id: req.body.postId}, { reactNumber:{likeNumber: newLikeNumber }, reactDetail:{listLikeUser: listLikeUser}} ,data=>{})
+                PostModel.findOneAndUpdate(
+                    {_id: req.body.postId}, 
+                    { 
+                        "reactNumber.likeNumber": newLikeNumber , 
+                        "reactDetail.listLikeUser": listLikeUser
+                    } ,
+                    ()=>{console.log('success')}
+                )
             })
             .catch(err =>{
                 console.log('ERROR Catched:',err)
@@ -83,7 +97,7 @@ class PostController{
         .then(data =>{
             let listComment = data.reactDetail.listComment
             listComment.push({uid: commentData.uid, comment: commentData.comment})
-            PostModel.findOneAndUpdate({_id: commentData.postId}, {reactDetail:{listComment: listComment}}, function(){console.log('Upadated Successfully')})
+            PostModel.findOneAndUpdate({_id: commentData.postId}, {"reactDetail.listComment": listComment}, function(){console.log('Upadated Successfully')})
         })
         .catch(err =>{
             console.log('ERROR Database:',err)

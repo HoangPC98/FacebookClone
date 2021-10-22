@@ -43,6 +43,7 @@
 
     function DisplayPostData(posts_data) {
         let likeStatus
+        console.log('PÓST_DATA',posts_data)
         posts_data.map(item => {
 
             if (item.reactDetail.listLikeUser.includes(dataUserId)) {
@@ -482,10 +483,6 @@
                             userChange: dataUserId
                         })
                     }
-            console.log('parents', parents)
-            parents.map(item => {
-
-            })
             console.log('this', this)
 
         })

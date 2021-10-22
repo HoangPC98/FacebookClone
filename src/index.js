@@ -37,11 +37,11 @@ let ApiController = require('./controllers/ApiController')
 
 // Routes
 app.get('/', (req,res)=>{
-    res.render('ex')
-})
-app.get('/login', (req,res)=>{
-    console.log('login get')
     res.render('auth',{error:''})
+})
+app.get('/home', (req,res)=>{
+    console.log('login get')
+    res.render('main')
 })
 app.post('/signup', AuthenController.PostSignUp)
 
