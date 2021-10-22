@@ -1,0 +1,42 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css" />
+<link rel="stylesheet" href="/css/homecss/home-post-box.css">
+
+  <link rel="stylesheet" href="css/homecss/home-container.css">
+    <link rel="stylesheet" href="/css/homecss/switchmode.css">
+    <link rel="stylesheet" href="/css/header.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+  <div class="commented-box__item">
+    <div class="commented-box__item-user">
+        <div class="commented-box__item-avatar">
+            <img src="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https:%2F%2Fblog.kakaocdn.net%2Fdn%2Fb65Ohg%2Fbtrci8yToa0%2Fzy8bkTKPAHR0OQUg4mfeTK%2Fimg.png"  alt="">
+        </div>
+        <div class="commented-box__item-info">
+            <div class="wrap">
+                <div class="comented-box__item-content">
+                    <div class="comented-box__item-name">
+                        ${userCmt.fullName}
+                    </div>
+                    <div class="comented-box__item-text">
+                        ${cmt.content}
+                    </div>
+                </div>
+            </div>
+            <div class="commented-box__item-reaction" data-index="${cmt.id}">
+                <span class=" ${users[this.idUser].cmtLiked.includes(cmt.id.toString()) ? 'active' : ''} commented-box__item-reaction--like">Thích</span>
+                •
+                <span class="commented-box__item-reaction--respond">Phản hồi</span>
+            </div>
+            <div style="display:" class="commented-count-reaction">
+                <i class="fas fa-thumbs-up"></i>
+                <span>${cmt.like}</span>
+            </div>
+        </div>
+        <div data-index="${cmt.id}" class="commented-box__item-delete" >
+            <i class="fad fa-trash-alt"></i>
+        </div>
+    </div>
+</div>    

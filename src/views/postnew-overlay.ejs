@@ -1,0 +1,110 @@
+
+<link rel="stylesheet" href="/css/homecss/home-post-box.css">
+   <div class="overplay post-new">
+    <div class="overplay-body">
+        
+        <!-- Box news feed -->
+        <div class="post-box">
+            <div class="post-box__head">
+                <h3 class="post-box__head-text">
+                    Tạo bài viết
+                </h3>
+                <span class="post-box__head-close" id="close-post-box">
+                    <i class="fas fa-times"></i>
+                </span>
+            </div>
+            <div class="post-box__main">
+                <div class="post-box__info">
+                    <img src="<%= data.avatar %>" alt="" class="avt post-box__avatar">    
+                    <div class="post-box__info-info">
+                        <p class="post-box__info-name full-name">
+                            <%= data.email %>
+                        </p>
+                        <div class="post-box__info-object">
+                            <i class="fas fa-globe-europe"></i>
+                            Công khai
+                        </div>
+                    </div>
+                </div>
+                <div class="post-box__content">
+                    <textarea value="hello" placeholder="Bạn đang nghĩ gì thế ?" type="text" class="post-box__content-textarea"></textarea>
+                    <div class="post-box__content-img">
+                        <img style="display: none;" src="" width="100%" alt="" class="">
+                        <span>&times;</span>
+                    </div>
+                </div>
+                <div class="post-box__add">
+                    <div class="post-box__add-head">
+                        Thêm vào bài viết
+                    </div>
+                    <div class="post-box__add-more">
+                        <div class="post-box__add-icon uploadfile">
+                            <input type="file" class="input-upload" hidden="hidden">
+                            <i style="color: #45bd62;" class="fas fa-images"></i>
+                        </div>
+                        <div class="post-box__add-icon">
+                            <i style="color: #f7b928;" class="fas fa-laugh"></i>
+                        </div>
+                        <div class="post-box__add-icon">
+                            <i style="color: #f5533d;" class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="post-box__add-icon">
+                            <i style="color: #717880;" class="fas fa-ellipsis-h"></i>
+                        </div>
+                    </div>
+                </div>
+                <button class="post-box__btn btn-disable">Đăng</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    document.querySelector('#close-post-box').onclick = ()=>{
+        document.querySelector('.overplay.post-new').style.display = 'none';
+    }
+    document.querySelector('.post-box__content-textarea').oninput = function(e){
+        if(e.target.value != ''){
+            console.log('ok nha')
+            document.querySelector('.post-box__btn').classList.add('btn-active');
+        }
+        else{
+            document.querySelector('.post-box__btn').classList.remove('btn-active')
+        }  
+    }
+
+    function getCookie(cName) {
+        const name = cName + "=";
+        const cDecoded = decodeURIComponent(document.cookie); //to be careful
+        const cArr = cDecoded.split('; ');
+        let res;
+        cArr.forEach(val => {
+            if (val.indexOf(name) === 0) res = val.substring(name.length);
+        })
+        return res
+    }
+    $('.post-box__btn').click (()=>{
+        
+        let uid = getCookie('uid')
+        console.log('uid',uid)
+        let content = $('.post-box__content-textarea').val()
+        let datetime = new Date().toLocaleDateString('en-US',{ year: 'numeric', month: 'long', day: '2-digit'})
+        let dataPost ={uid, content, datetime}
+        let options = {
+            method: 'POST',
+            headers: { "Content-type": "application/json; charset=UTF-8" },
+            body: JSON.stringify(dataPost)
+        }
+
+        fetch('/postnews', options)
+        .then(res=>{
+            if(!res.ok) 
+                console.error(res)
+            else 
+                res.json()
+        })
+
+        document.querySelector('.overplay.post-new').style.display = 'none'
+    })
+</script>

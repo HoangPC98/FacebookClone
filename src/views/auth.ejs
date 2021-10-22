@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook - Đăng nhập hoặc đăng ký</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/authcss/login.css">
+    <link rel="stylesheet" href="/css/variables.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+    <!-- <link rel="stylesheet" href="css/login.css"> -->
+</head>
+<body>
+    <div class="app">
+        <div class="login">
+            <div class="login-left">
+                <div class="login-left__img">
+                    <img src="https://static.xx.fbcdn.net/rsrc.php/y8/r/dF5SId3UHWd.svg" alt="">
+                </div>
+
+                <div class="login-left__text">
+                    Facebook giúp bạn kết nối và chia sẻ với mọi người trong cuộc sống của bạn.
+                </div>
+            </div>
+            <div class="login-right">
+
+                    <% if (error){ %>
+                        <div class="alert alert-danger" role="alert" style="font-size: 16px">
+                        <%= error %>
+                        </div>
+            
+                    <% } %>    
+             
+                <div class="form-login">
+                    <form method="post" action="/login">
+                        <input name="email" id="TK" type="text" placeholder="Email hoặc số điện thoại" class="form-login__id" required>
+                        <input name="password" id="PW" type="password" placeholder="Mật khẩu" class="form-login__pw" required>
+                        <button type="submit" class="form-login__btn btn"> Đăng nhập</button>
+                    </form>
+                    <a href="#" onclick="return false" class="form-login__text-forgetpw">Quên mật khẩu?</a>
+                    <div class="form-hr"></div>
+                    <button class="form-signup__btn btn">Tạo tài khoản mới</button>
+                </div>
+                <div class="login-right__text">
+                    <span>Tạo trang</span> dành cho người nổi tiếng, nhãn hiệu hoặc danh nghiệp.
+                </div>
+            </div>
+        </div>
+        <div class="overplay">
+            <div class="overplay-body">
+
+                <!-- Đăng ký -->
+                <div class="sign-up">
+                    <div class="sign-up__head">
+                        <div class="sign-up__heading">Đăng ký</div>
+                        <p class="sign-up__sub-heading">Nhanh chóng và dễ dàng.</p>
+                        <img src="https://static.xx.fbcdn.net/rsrc.php/v3/y2/r/__geKiQnSG-.png" alt="" class="sign-up__close">
+                    </div>
+        
+                    <div class="form-hr"></div>
+        
+                    <form class="sign-up__action" method="POST" action="/signup">
+                        <div class="sign-up__name">
+                            <input type="text" class="sign-up__first-name" placeholder="Họ" required>
+                            <input name="userName" type="text" class="sign-up__last-name" placeholder="Tên" required>
+                        </div>
+                        <input name="email" type="text" class="sign-up__email" placeholder="Số di động hoặc email" required>
+                        <input name="password" type="password" class="sign-up__pw" placeholder="Mật khẩu" required>
+                        <input type="password" class="sign-up__pw" placeholder="Xác nhận mật khẩu" required>
+                        <div class="sign-up__gender">
+                            <div class="sign-up__gender-head">Giới tính</div>
+                            <span class="sign-up__gender-icon"></span>
+                            <div class="sign-up__gender-radio">
+                                <label for="male" class="gender-radio__male">
+                                    Nam
+                                    <input checked type="radio" name="gender" id="male" value="male">
+                                </label>
+                                <label for="female" class="gender-radio__female">
+                                    Nữ
+                                    <input type="radio" name="gender" id="female" value="female">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="sign-up__policy">
+                            Bằng cách nhấp vào Đăng ký, bạn đồng ý với
+                            <span> Điều khoản, Chính sách dữ liệu </span> và <span>Chính sách cookie</span> của chúng tôi. Bạn có thể nhận được thông báo của chúng tôi qua SMS và hủy nhận bất kỳ lúc nào.
+                        </div>
+                        <button type="submit" class="btn sign-up__btn">Đăng ký</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <script src="./vendors/js/cute-alert.js"></script>
+    <script src="./assets/js/app.js"></script>
+    <script src="./assets/js/login.js"></script> -->
+
+    <script>
+        $('.form-signup__btn').click(()=>{
+            console.log('sadsfjdgf')
+            document.querySelector('.overplay').style.display = 'flex'
+        })
+        $('.sign-up__close').click(()=>{
+            document.querySelector('.overplay').style.display = 'none'
+
+        })
+
+        $('.form-login').onsubmit = ()=>{
+            let email = $('.form-login__id').val()
+            let password = $('.form-login__pw').val()
+            let data_login = {email, password}
+            let option_login = {
+                method: 'POST',
+                headers: { "Content-type": "application/json; charset=UTF-8" },
+                body: JSON.stringify(data_login)
+            }
+            fetch('/login',option_login)
+                    .then( (res)=>{
+                        if(!res.ok)
+                            console.error(res)
+                        else
+                            return res.json()
+                    })
+                    .then((result)=>{
+                        console.log(result)
+                    })
+
+        }
+           
+        $('.sign-up__action').onsubmit = ()=>{
+            console.log("submittinggggg")
+                let userName = $('.sign-up__first-name').val() + ' ' +  $('.sign-up__last-name').val()
+                let email = $('.sign-up__email').val()
+                let password = $('.sign-up__pw').val()
+                // let gender = $('.gender_radio').checked()
+                let data = {
+                    userName,
+                    email,
+                    password
+                }
+                let option = {
+                    method: 'POST',
+                    headers: { "Content-type": "application/json; charset=UTF-8" },
+                    body: JSON.stringify(data)
+                }
+                fetch('/signup',option)
+                    .then( (res)=>{
+                        if(!res.ok)
+                            console.error(res)
+                        else
+                            return res.json()
+                    })
+                    .then((result)=>{
+                        console.log(result)
+                    })
+        }
+    </script>
+</body>
+</html>

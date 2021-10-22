@@ -1,0 +1,53 @@
+  <!-- <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css" />
+<link rel="stylesheet" href="/css/homecss/home-post-box.css">
+
+  <link rel="stylesheet" href="css/homecss/home-container.css">
+    <link rel="stylesheet" href="/css/homecss/switchmode.css">
+    <link rel="stylesheet" href="/css/header.css"> -->
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+
+
+<div class="overplay list-like">
+    <div class="overplay-body">
+        
+        <!-- Box news feed -->
+        <div class="post-box list-like">
+            <div class="post-box__head">
+                <h3 class="post-box__head-text">
+                    Tất cả lượt thích
+                </h3>
+                <span class="post-box__head-close" id ="close-userlike-box">
+                    <i class="fas fa-times"></i>
+                </span>
+            </div>
+            <div class="body">
+                <ul class="list-user">
+                    <li class="container-right__connect-item flex-roww">
+                        <div class="left-section flex-roww">
+                            <div class="container-right__connect-item-avatar">
+                                <img src="https://tse2.mm.bing.net/th?id=OIP.XzTH6q-8VET8flBmdLiiBwDgDg&pid=Api&P=0&w=300&h=300" alt="" class="container-right__connect-item-img">
+                            </div>
+                            <span class="container-right__connect-item-name">Nguyễn Hoàng Uyên My</span>
+                        </div>
+                        <button type="button" class="btn btn-active" data-toggle="modal" data-target="#"style="font-size:14px">Thêm bạn bè</button>
+                    </li>
+                 
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $('.overplay.list-like').click(function() {
+            console.log('post data cloidcked',postDataClicked)
+
+        })
+
+        document.querySelector('#close-userlike-box').onclick = ()=>{
+            document.querySelector('.overplay.list-like').style.display = 'none';
+    }
+        
+    </script>
+</div>
