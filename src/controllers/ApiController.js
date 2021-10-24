@@ -39,5 +39,47 @@ class ApiController{
         })
         
     }
+
+    GetSearch(req,res){
+        console.log('search post....', req.query.key)
+        UserModel.find({})
+        .then((data) =>{
+
+            if(data){
+                // res.json(data)
+                let process_data = []
+                data.map(item =>{
+                    if(item.userName.toLowerCase().split(' ').join('').includes(req.query.key.split('-').join(''))){
+                        process_data.push({
+                            uid: item._id,
+                            userName: item.userName,
+                            avatar: item.avatar
+                        })
+                    }
+         
+                })
+                console.log('process_data', process_data)
+
+                res.render('search-result-page', {search_data: process_data})
+            }
+        })
+        .catch((err) =>{
+            res.status(500).json({error: err})
+        })
+    }
+
+    GetDataUserLogined(req,res){
+        console.log('get data user.........', req.body)
+        UserModel.findOne({_id: req.body.uid_logined})
+        .then(data=>{
+            let dataUserLogined = {
+                uid: data._id,
+                userName: data.userName,
+                avatar: data.avatar
+            }
+            console.log('datauser',dataUserLogined)
+            res.json({dataUserLogined})
+        })
+    }
 }
 module.exports = new ApiController

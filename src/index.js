@@ -3,9 +3,10 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const ejs = require('ejs')
 const ejsLayouts = require('express-ejs-layouts')
+const cookieParser = require('cookie-parser');
 app = express();
 
-let port = 3456
+let port = 5000
 
 // body-parser
 app.use(bodyParser.urlencoded({extended: true}));
@@ -23,6 +24,8 @@ app.set('view engine', 'ejs')
 const ConnectDB = require('./config/database')
 ConnectDB()
 
+// cookie parser
+app.use(cookieParser());
 
 // app.get('/', (req,res)=>{
 //     res.render('postnew.ejs')
@@ -34,15 +37,15 @@ let route = require('./routes/route-index.js')
 let AuthenController = require('./controllers/AuthenController')
 let PostController = require('./controllers/PostController')
 let ApiController = require('./controllers/ApiController')
+let SiteController = require('./controllers/SiteController')
 
 // Routes
 app.get('/', (req,res)=>{
     res.render('auth',{error:''})
 })
-app.get('/home', (req,res)=>{
-    console.log('login get')
-    res.render('main')
-})
+
+app.get('/home', SiteController.GetHome, SiteController.NextIfGetHomeFail)
+
 app.post('/signup', AuthenController.PostSignUp)
 
 app.post('/login', AuthenController.PostLogIn)
@@ -52,6 +55,15 @@ app.post('/postnews', PostController.SubmitPostNews)
 app.post('/like-change', PostController.LikeChange)
 
 app.post('/post-comment', PostController.PostComment)
+
+app.post('/get-data-user-logined', ApiController.GetDataUserLogined)
+
+// app.post('/search', ApiController.PostSearch)
+
+// Seacrh Input
+
+app.get('/search', ApiController.GetSearch)
+
 
 // Call API to Get data
 app.get('/api/posts', ApiController.GetPosts)

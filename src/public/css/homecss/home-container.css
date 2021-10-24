@@ -512,6 +512,7 @@
     align-items: center;
     padding: 8px;
     border-radius: 6px;
+    border-bottom: 1px solid #bbb;
 }
 
 

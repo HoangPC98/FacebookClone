@@ -8,29 +8,28 @@
 
     <link rel="stylesheet" href="/css/base.css">
     <link rel="stylesheet" href="/css/variables.css">
+    <link rel="stylesheet" href="/css/homecss/home.css">
     <link rel="stylesheet" href="/css/cute-alert.css">
+    <link rel="stylesheet" href="css/homecss/home-container.css">
+    <link rel="stylesheet" href="/css/homecss/switchmode.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+ 
 </head>
 <body>
-    <span id="data-user-logined" style="display: none" datauser="<%= data._id %>">  </span>
-        <script>
-            let dataUserId = document.querySelector('#data-user-logined').getAttribute('datauser')
-            console.log('datauser', dataUserId)
-            let dt = {a: 1, b: "b"}
-            console.log('type of dt', typeof dt, dt)
-            let dataUserr = JSON.stringify(dataUserId)
-            let e = JSON.parse(dataUserr)
-            console.log(dataUserId, 'type of', typeof dataUserId)
-        </script>
-
-
-    <%- include('header') %>
-
-    <%- include('list-like') %>
-
-    <%- include('container') %>
-    <%- include('postnew-overlay') %>
+    <div class="app">
+        <div class="app-grid">
+            <%- include("a-common-view-data") %>
+    
+            <%- include('header') %>
+        
+            <%- include('list-like') %>
+        
+            <%- include('container') %>
+            <%- include('postnew-overlay') %>
+        </div>
+    </div>
+   
      
 </body>
 

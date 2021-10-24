@@ -1,0 +1,58 @@
+
+<script>
+    let FetchPostData = function (apiUrl, data) {
+       // console.log('data passed', data)
+       let post = {
+           method: 'POST',
+           headers: {
+               "Content-type": "application/json; charset=UTF-8"
+           },
+           body: JSON.stringify(data)
+       }
+       fetch(apiUrl, post)
+           .then(dataFetch => {
+               console.log('POST SENDED', dataFetch)
+               return dataFetch.json()
+           })
+           .then(data=>{
+               console.log('FETCH POST OK', data) 
+               return data     
+           })
+           .catch(error=>{
+               console.log('ERROR FETCH:', error)
+           })
+   }
+
+   // Fetch GetData
+   let FetchGetData = async function (apiUrl){
+       await fetch(apiUrl)
+       .then(response => {
+           return response.json()
+       })
+       .then(data=>{
+           console.log('FEETCH OK', data)
+           return data
+           
+       })
+       .catch(error=>{
+           console.log('ERROR SERVER: ',error )
+       })
+   }
+
+   // GetCookieByName
+    function getCookie(name) {
+           // Split cookie string and get all individual name=value pairs in an array
+           var cookieArr = document.cookie.split(";");
+           for(var i = 0; i < cookieArr.length; i++) {
+               var cookiePair = cookieArr[i].split("=");
+               if(name == cookiePair[0].trim()) {
+                   return decodeURIComponent(cookiePair[1]);
+               }
+           }
+           return null;
+    }
+    let cookie_logined = getCookie('user_logined')   
+    let Json_cookie = JSON.parse(cookie_logined)
+    console.log('cookie login',Json_cookie.userName)
+    let dataUserId = Json_cookie.userId
+</script>

@@ -24,7 +24,6 @@
                 return response.json()
             })
             .then(data => {
-
                 let posts_data = []
                 data.map(item => {
                     // console.log( item.createdAt.toLocaleDateString('en-US',{ year: 'numeric', month: 'long', day: '2-digit'}))
@@ -37,6 +36,7 @@
             .then((result) => {
                 console.log(result)
                 DisplayPostData(result)
+
             })
     }
     CallApi()
@@ -291,13 +291,13 @@
                         `<div class="commented-box__item">
                             <div class="commented-box__item-user">
                                 <div class="commented-box__item-avatar">
-                                    <img src="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https:%2F%2Fblog.kakaocdn.net%2Fdn%2Fb65Ohg%2Fbtrci8yToa0%2Fzy8bkTKPAHR0OQUg4mfeTK%2Fimg.png"  alt="">
+                                    <img src="${comment_item.avatar}"  alt="">
                                 </div>
                                 <div class="commented-box__item-info">
                                     <div class="wrap">
                                         <div class="comented-box__item-content">
                                             <div class="oninput">
-                                                ${comment_item.uid}
+                                                ${comment_item.userName}
                                             </div>
                                             <div class="comented-box__item-text">
                                                 ${comment_item.comment}
@@ -333,21 +333,21 @@
         // function get All Parents 
 
 
-        let FetchPostData = async function (apiUrl, data) {
-            // console.log('data passed', data)
-            post = {
-                method: 'POST',
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8"
-                },
-                body: JSON.stringify(data)
-            }
-            await fetch(apiUrl, post)
-                .then(dataFetch => {
-                    console.log('POST SENDED', dataFetch)
-                })
+        // let FetchPostData = async function (apiUrl, data) {
+        //     // console.log('data passed', data)
+        //     post = {
+        //         method: 'POST',
+        //         headers: {
+        //             "Content-type": "application/json; charset=UTF-8"
+        //         },
+        //         body: JSON.stringify(data)
+        //     }
+        //     await fetch(apiUrl, post)
+        //         .then(dataFetch => {
+        //             console.log('POST SENDED', dataFetch)
+        //         })
 
-        }
+        // }
         // Click Send COmment
         $('.item-post').click(function(e){
 
@@ -355,6 +355,10 @@
             let InputElementOnInputing = PostItemClicked.querySelector('.newsfeed__comment-input')
             
             let sentCmtBtn = PostItemClicked.querySelector('.send-comment')
+
+            $('.newsfeed__comment-input').on('keydown', function(e) {
+                console.log('ekey',e.key)
+            })
 
             InputElementOnInputing.oninput = function () {
                 console.log('20202',  InputElementOnInputing.parentElement)

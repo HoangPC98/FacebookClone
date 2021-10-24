@@ -33,12 +33,21 @@ class AuthenController{
                 console.log('Login successful')
 
                 let userId = JSON.stringify(data._id).toString()
-                // console.log('uid', userId)
 
                 userId = userId.split('"').join('') // xóa bỏ tất cả các kí tự " trong chuỗi
                 // console.log('uid2', userId)
-                
-                res.cookie(`uid`, userId).render('main', {data: data})
+                let userName = data.userName
+                let password = data.password
+                let avatar = data.avatar
+                let user_logined = {
+                    userId,
+                    userName,
+                    password,
+                    avatar,
+                }
+                user_logined = JSON.stringify(user_logined)
+                console.log('cookie userlogined',user_logined)
+                res.cookie('user_logined', user_logined).render('main', {data: data})
             }
             else{
                 res.render('auth',{error:'Đăng nhập thất bại, Tên đăng nhập hoặc mật khẩu không đúng'})

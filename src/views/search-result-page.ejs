@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/variables.css">
+    <link rel="stylesheet" href="/css/cute-alert.css">
+    <link rel="stylesheet" href="css/homecss/home-container.css">
+    <link rel="stylesheet" href="/css/homecss/switchmode.css">
+
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <% var ejsdata = search_data %>
+
+  <%- include("a-common-view-data") %>
+
+  <%- include('header') %>
+  <section class="container">
+
+    <%- include('container-left') %>
+    <section class="container-main " >
+      <div class=""id="container-data-search " style="width: 70%">
+        <div class="post-box__head" style="text-align:center; font-size: 16px; padding: 10px 0; border-bottom: 1px solid #888">
+            <h3 class="post-box__head-text">
+                Kết quả tìm kiêm
+            </h3>
+        </div>
+          <ul class="list-user">
+            <% ejsdata.map(item =>{ %>
+              <li class="container-right__connect-item flex-roww">
+                        <div class="left-section flex-roww">
+                            <div class="container-right__connect-item-avatar">
+                                <img src="https://tse2.mm.bing.net/th?id=OIP.XzTH6q-8VET8flBmdLiiBwDgDg&pid=Api&P=0&w=300&h=300" alt="" class="container-right__connect-item-img">
+                            </div>
+                            <span class="container-right__connect-item-name"><%= item.userName %></span>
+                        </div>
+                        <button type="button" class="btn btn-active" data-toggle="modal" data-target="#"style="font-size:14px">Thêm bạn bè</button>
+              </li>
+            <% }) %>
+          </ul>
+      </div>
+      <div class="dataa">
+      </div>
+    </section>
+    <%- include('container-right') %>
+
+
+  </section>
+
+</body>
+
+<script>
+    // let dom = document.querySelector('#container-data-search').getAttribute('atridata')
+    // console.log('DOM',dom)
+    // // JSON.parse(ejsdata)
+    // var getTest = <%= ejsdata  %>;  //var test is now assigned to getTest which will only work on browsers
+    // console.log(typeof getTest)
+    // console.log('get data',getTest);
+   
+</script>
+</html>

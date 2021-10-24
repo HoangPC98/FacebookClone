@@ -1,9 +1,12 @@
-
+<script>
+    console.log('cookie nef', Json_cookie)
+</script>
 <div class="container-posts">
     <div class="posts__new-post">
-        <img src="<%= data.avatar %>" alt="" class="avt posts__new-post-img nav-wall">
+        <img src="" alt="" class="avt posts__new-post-img nav-wall" id="avatar-postnew">
         <button class="new-post-btn posts__new-post-btn">
             Bạn đang nghĩ gì thế ?
+            
         </button>
     </div>
     <ul class="post__action">
@@ -27,4 +30,6 @@
         console.log('OVERLAY')
         document.querySelector('.overplay.post-new').style.display = 'block';
     }
+    $('.avt posts__new-post-img nav-wall').src = Json_cookie.avatar
+    document.querySelector('#avatar-postnew').src = Json_cookie.avatar
 </script>

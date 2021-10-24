@@ -15,10 +15,10 @@
             </div>
             <div class="post-box__main">
                 <div class="post-box__info">
-                    <img src="<%= data.avatar %>" alt="" class="avt post-box__avatar">    
+                    <img src="" alt="" class="avt post-box__avatar" id="avatar-postnew-overlay">    
                     <div class="post-box__info-info">
                         <p class="post-box__info-name full-name">
-                            <%= data.email %>
+                
                         </p>
                         <div class="post-box__info-object">
                             <i class="fas fa-globe-europe"></i>
@@ -64,6 +64,8 @@
     document.querySelector('#close-post-box').onclick = ()=>{
         document.querySelector('.overplay.post-new').style.display = 'none';
     }
+    document.querySelector('.post-box__info-name.full-name').innerHTML = Json_cookie.userName
+    document.querySelector('#avatar-postnew-overlay').src = Json_cookie.avatar
     document.querySelector('.post-box__content-textarea').oninput = function(e){
         if(e.target.value != ''){
             console.log('ok nha')
@@ -86,7 +88,8 @@
     }
     $('.post-box__btn').click (()=>{
         
-        let uid = getCookie('uid')
+        let uid = getCookie('user_logined')
+        uid = JSON.parse(uid).userId
         console.log('uid',uid)
         let content = $('.post-box__content-textarea').val()
         let datetime = new Date().toLocaleDateString('en-US',{ year: 'numeric', month: 'long', day: '2-digit'})

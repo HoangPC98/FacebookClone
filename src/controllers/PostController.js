@@ -94,10 +94,20 @@ class PostController{
         console.log('POST COMMENT')
         let commentData = req.body
         PostModel.findOne({_id: commentData.postId})
+        
         .then(data =>{
             let listComment = data.reactDetail.listComment
-            listComment.push({uid: commentData.uid, comment: commentData.comment})
-            PostModel.findOneAndUpdate({_id: commentData.postId}, {"reactDetail.listComment": listComment}, function(){console.log('Upadated Successfully')})
+            var avatarUserCmt
+            var userNameCmt
+            UserModel.findOne({_id: commentData.uid})
+            .then(data =>{
+                avatarUserCmt = data.avatar
+                userNameCmt = data.userName
+                listComment.push({uid: commentData.uid, comment: commentData.comment, avatar: avatarUserCmt, userName: userNameCmt})
+                PostModel.findOneAndUpdate({_id: commentData.postId}, {"reactDetail.listComment": listComment}, function(){console.log('Upadated Successfully')})
+            })
+
+            
         })
         .catch(err =>{
             console.log('ERROR Database:',err)

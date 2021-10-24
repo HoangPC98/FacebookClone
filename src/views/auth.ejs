@@ -121,6 +121,8 @@
                 headers: { "Content-type": "application/json; charset=UTF-8" },
                 body: JSON.stringify(data_login)
             }
+
+            
             fetch('/login',option_login)
                     .then( (res)=>{
                         if(!res.ok)

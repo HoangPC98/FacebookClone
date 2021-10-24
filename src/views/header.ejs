@@ -3,9 +3,11 @@
 <header class="header">
     <div class="header-grid">
         <div class="header-left">
+           <a href="/home">
             <div class="header-left__logo">
                 <i class="fab fa-facebook header-left__icon-logo"></i>
             </div>
+           </a>
             <div class="header-left__search">
                 <div class="header-left__search-icon">
                     <i class="fal fa-search"></i>
@@ -53,8 +55,8 @@
 
         <ul class="header-right">
             <li class="header-right__profile nav-wall">
-                <img src="<%= data.avatar %>" alt="" class="header-profile__img avt">
-                <span class="header-profile__name last-name"><%= data._id %></span>
+                <img src="" class="header-profile__img avt" id="header-avatar">
+                <span class="header-profile__name last-name"></span>
             </li>
             <li class="header-right__item plus">
                 <i class="fas fa-plus header-right__item-plus"></i>
@@ -312,3 +314,61 @@
         </ul>
     </div>
 </header>
+
+<script>
+    console.log('HEADER DATAass', Json_cookie)
+    $('.header-profile__name.last-name').html(Json_cookie.userName)
+    console.log('src avt', Json_cookie.avatar)
+    document.getElementById('header-avatar').setAttribute('src', Json_cookie.avatar)
+
+    // SearchBox Input : OnInput
+    $('#search-input').on('keydown', function(e){
+        console.log('key:', e.key)
+        if(e.key == 'Enter'){
+            console.log('EnterKey',this.value)
+            inputValue = this.value
+            inputValue = inputValue.toLowerCase().split(' ').join('-')
+            console.log('SEARCHHH', inputValue)
+
+            dataSearch = {data_search: inputValue}
+            let path = `/search?key=${inputValue}`
+            window.location.href = path
+        }
+    })
+
+    // Click to Caret-down : show logout button
+    $('.header-right__item').click(function(){
+        if(this.classList.contains('active')){
+            this.classList.remove('active')
+        }
+        else{
+            this.classList.add('active')
+
+        }
+    })
+    // document.querySelector('.header-right__item-more.header-right__setting').style.display = 'flex'
+    $('.setting-head__content-name.full-name').html(Json_cookie.userName)
+    document.querySelector('.setting-head__avatar').src = Json_cookie.avatar
+    $('.setting__item.nav-logout').click(function(){
+        function delete_cookie(name) {
+            document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        }
+        delete_cookie('user_logined')
+        window.location.href ='/'
+        console.log('JSON COKKIE DELETED 2', Json_cookie)
+    })
+
+    // Switch Mode button
+    $('.header-switch__box').click(function(){
+        if(this.classList.contains('dark')){
+            this.classList.remove('dark')
+            document.querySelector('.app').classList.remove('dark')
+        }
+        else{
+            this.classList.add('dark')
+            document.querySelector('.app').classList.add('dark')
+            
+        }
+    })
+
+</script>
