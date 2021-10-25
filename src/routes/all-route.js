@@ -15,6 +15,26 @@ const SiteController = require('../controllers/SiteController')
 
 
 function AllRoute(app){
+   
+   
+    const multer = require('multer')
+
+    // config storage location, filename
+    var storage = multer.diskStorage({
+        destination: function (req, file, callback) {
+            callback(null, './src/public/uploads')
+        },
+        filename: function (req, file, callback) {
+            let fileName = Date.now() + '-' + file.originalname
+            callback(null, fileName)
+        }
+    })
+    
+
+    var upload = multer({storage: storage})  // 
+    app.post('/postnew', upload.single('postimg'), PostController.SubmitPostNews)  
+
+    // app.post('/postnews', PostController.SubmitPostNews)
 
     
     // let gridfs
@@ -34,7 +54,9 @@ function AllRoute(app){
         res.render('wall-page')
     })
     
-    app.post('/postnews', PostController.SubmitPostNews)
+    app.get('/change-avt', (req,res)=>{
+        res.render('change-avt-overlay')
+    })
 
     app.get('/home', SiteController.GetHome, SiteController.NextIfGetHomeFail)
     
@@ -48,6 +70,8 @@ function AllRoute(app){
 
     app.post('/get-data-user-logined', ApiController.GetDataUserLogined)
 
+    app.post('/change-avt/:uid', upload.single('input_upload_avt'), ApiController.ChangeAvt)
+
     // app.post('/search', ApiController.PostSearch)
 
     // Seacrh Input
@@ -60,14 +84,9 @@ function AllRoute(app){
     app.get('/api/user-logined-posts/:uid', ApiController.GetUserLoginedPosts)
     app.get('/api/get-user-display', ApiController.GetUserDisplay)
     app.get('/api/get-comments/:postid', ApiController.GetCommentViaPostId)
-    // Get FIle
-    // app.get('/file/:filename', async (req,res)=>{
-    //     console.log('FILE HERE')
-    //     FileModel.findOne({filename: req.params.filename})
-    //     .then(data=>{
-    //         console.log('data file', data)
-    //     })
-    // })
+    
+
+    
 }
 
 module.exports = AllRoute

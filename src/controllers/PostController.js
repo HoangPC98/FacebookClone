@@ -1,39 +1,35 @@
 const PostModel = require('../models/Posts')
 const UserModel = require('../models/Users')
 
+// const multer = require('multer')
+// var upload = multer({dest: './public/my-uploads/'})  // 
+
+
 class PostController{
     SubmitPostNews(req, res, next){
-        console.log('request payload',req.body)
-
+        console.log('request payload', req.file.path)
+        res.send('post success')
         var uid = req.body.uid   
-        UserModel.findOne({_id: req.body.uid})
-            .then(dataUser => {
-                console.log('DATA FINED',dataUser)
-                const postData = new PostModel({
-                    uid: dataUser._id,
-                    content: req.body.content,
-                    // img: req.file.filename,
+        let path = '/uploads/' + req.file.filename
 
-                    userInfo:{
-                        userName: dataUser.userName,
-                        avatarUrl:  dataUser.avatar,
-                    }
-                })
-                postData.save()
-            })
-            .then(() => {
-                PostModel.findOne({uid: uid})
-                .then(data =>{
-                    res.render('main',{data: data})
-                })
-                .catch(err =>{
-                    console.log('ERROR Catched:',err)
-                })
-
-            })
-            .catch(err =>{
-                console.log('ERROR Catched:',err)
-            })
+        console.log('path...',path)
+        const postData = new PostModel({
+            uid: uid,
+            content: req.body.content,
+            img: path,
+        })
+        postData.save()
+  
+        PostModel.findOne({uid: uid})
+        .then(data =>{
+            res.render('main',{data: data})
+        })
+        .catch(err =>{
+            console.log('ERROR Catched:',err)
+        })
+                
+     
+          
       
     }
     LikeChange(req,res) {
@@ -101,15 +97,18 @@ class PostController{
             let listComment = data.reactDetail.listComment
             var avatarUserCmt
             var userNameCmt
+            var commentNumber = data.reactNumber.commentNumber
+        
             UserModel.findOne({_id: commentData.uid})
             .then(data =>{
                 avatarUserCmt = data.avatar
                 userNameCmt = data.userName
+                commentNumber += 1
                 listComment.push({uid: commentData.uid, comment: commentData.comment, avatar: avatarUserCmt, userName: userNameCmt})
-                PostModel.findOneAndUpdate({_id: commentData.postId}, {"reactDetail.listComment": listComment}, function(){console.log('Upadated Successfully')})
+                PostModel.findOneAndUpdate({_id: commentData.postId}, {"reactDetail.listComment": listComment, "reactNumber.commentNumber": commentNumber}, function(){console.log('Upadated Successfully')})
             })
 
-            
+            res.redirect('/home')
         })
         .catch(err =>{
             console.log('ERROR Database:',err)

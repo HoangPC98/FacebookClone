@@ -1,5 +1,6 @@
 
 <link rel="stylesheet" href="/css/homecss/home-post-box.css">
+
    <div class="overplay post-new">
     <div class="overplay-body">
         
@@ -26,35 +27,41 @@
                         </div>
                     </div>
                 </div>
-                <div class="post-box__content">
-                    <textarea value="hello" placeholder="Bạn đang nghĩ gì thế ?" type="text" class="post-box__content-textarea"></textarea>
-                    <div class="post-box__content-img">
-                        <img style="display: none;" src="" width="100%" alt="" class="">
-                        <span>&times;</span>
+
+                <form class="form-submit-new-post" action="/postnew" method="post" enctype="multipart/form-data">
+                    <div class="post-box__content">
+                        <textarea name="content" placeholder="Bạn đang nghĩ gì thế ?" type="text" class="post-box__content-textarea" style="min-height: 40px;"></textarea>
+                        <input type="hidden" class="uid-post" name="uid" value="">
+                        <input type="hidden" class="date-time-post" name="date_time_post" value="">
+                        <div class="post-box__content-img">
+                            <img class="img-preview" src="" width="100%" alt="">
+                            <span>&times;</span>
+                        </div>
                     </div>
-                </div>
-                <div class="post-box__add">
-                    <div class="post-box__add-head">
-                        Thêm vào bài viết
+                    <div class="post-box__add">
+                        <div class="post-box__add-head">
+                            Thêm vào bài viết
+                        </div>
+                            <div class="post-box__add-more">
+                                <div class="post-box__add-icon uploadfile">
+                                    <input type="file" class="input-upload" name="postimg" id="image" hidden="hidden">
+                                    <i style="color: #45bd62;" class="fas fa-images"></i>
+                                </div>
+                                <div class="post-box__add-icon">
+                                    <i style="color: #f7b928;" class="fas fa-laugh"></i>
+                                </div>
+                                <div class="post-box__add-icon">
+                                    <i style="color: #f5533d;" class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="post-box__add-icon">
+                                    <i style="color: #717880;" class="fas fa-ellipsis-h"></i>
+                                </div>
+                                <!-- <button type="submit" class="btn-submit-file">SUBMIT</button> -->
+                            </div>
                     </div>
-                    <div class="post-box__add-more">
-                            <div class="post-box__add-icon uploadfile">
-                                <input type="file" class="input-upload" name="image" id="image" hidden="hidden">
-                                <i style="color: #45bd62;" class="fas fa-images"></i>
-                            </div>
-                            <div class="post-box__add-icon">
-                                <i style="color: #f7b928;" class="fas fa-laugh"></i>
-                            </div>
-                            <div class="post-box__add-icon">
-                                <i style="color: #f5533d;" class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div class="post-box__add-icon">
-                                <i style="color: #717880;" class="fas fa-ellipsis-h"></i>
-                            </div>
-                            <!-- <button type="submit" class="btn-submit-file">SUBMIT</button> -->
-                    </div>
-                </div>
-                <button class="post-box__btn btn-disable">Đăng</button>
+                    <button type="button" class="post-box__btn btn-disable">Đăng</button>
+
+                </form>
             </div>
         </div>
 
@@ -99,35 +106,44 @@
    
         
         // document.querySelector('.overplay.post-new').style.display = 'none'
-
-        $('.post-box__btn').click(function(){
-            let uid = getCookie('user_logined')
-            uid = JSON.parse(uid).userId
-            console.log('uid',uid)
-            let content = $('.post-box__content-textarea').val()
-            let datetime = new Date().toLocaleDateString('en-US',{ year: 'numeric', month: 'long', day: '2-digit'})
-            let dataPost ={uid, content, datetime}
-            let options = {
-                method: 'POST',
-                headers: { "Content-type": "application/json; charset=UTF-8" },
-                body: JSON.stringify(dataPost)
+        document.querySelector('.input-upload').onchange = function(e){
+            if(e.target.files.length >0){
+                let src = URL.createObjectURL(e.target.files[0])
+                document.querySelector('.img-preview').src = src
+                document.querySelector('.img-preview').style.display = 'block'
             }
+        }
 
-            fetch('/postnews', options)
-            .then(res=>{
-                if(!res.ok){
-                    console.error(res)
-                    console.log('post that bai')
-                    
-                }
-                else{
-                    console.log('post thanh cogn')
-                    res.json()
+        
 
-                }
-            })
-
+        document.querySelector('.post-box__btn').onclick = function(){
+            document.querySelector('.uid-post').value = Json_cookie.userId
+            document.querySelector('.date-time-post').value = Date.now()
+            document.querySelector('.form-submit-new-post').submit()
             document.querySelector('.overplay.post-new').style.display = 'none'
+            // let content = $('.post-box__content-textarea').val()
+            // let datetime = new Date().toLocaleDateString('en-US',{ year: 'numeric', month: 'long', day: '2-digit'})
+            // let dataPost ={uid, content, datetime}
+            // let options = {
+            //     method: 'POST',
+            //     headers: { "Content-type": "application/json; charset=UTF-8" },
+            //     body: JSON.stringify(dataPost)
+            // }
 
-        })
+            // fetch('/postnew', options)
+            // .then(res=>{
+            //     if(!res.ok){
+            //         console.error(res)
+            //         console.log('post that bai')
+                    
+            //     }
+            //     else{
+            //         console.log('post thanh cogn')
+            //         res.json()
+
+            //     }
+            // })
+
+
+        }
 </script>

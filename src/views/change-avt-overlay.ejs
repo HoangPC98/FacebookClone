@@ -1,0 +1,71 @@
+<link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/variables.css">
+    <link rel="stylesheet" href="/css/cute-alert.css">
+    <link rel="stylesheet" href="css/homecss/home-container.css">
+    <link rel="stylesheet" href="/css/homecss/switchmode.css">
+    <link rel="stylesheet" href="/css/homecss/home-wall.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/css/homecss/home-post-box.css">
+
+<%- include("a-common-view-data") %>
+
+
+<div class="overplay change-avt">
+    <div class="overplay-body">
+        <!-- Box news feed -->
+        <div class="post-box">
+            <div class="post-box__head">
+                <h3 class="post-box__head-text">
+                    Cập nhật ảnh đại diện
+                </h3>
+                <span class="post-box__head-close" id="close-avt-box">
+                    <i class="fas fa-times"></i>
+                </span>
+
+            </div>
+            <button type="button" class="post-box__btn btn-active upload-btn">Tải ảnh lên</button>
+
+            <div class="post-box__main">
+                <form class="form-upload-avt" method="post" enctype="multipart/form-data">
+
+                    <div class="post-box__content-img">
+                        <img src="" class="avt-current" width="100%">
+                        <img class="img-preview avt" src="" width="100%" hidden="hidden">
+                        
+                        <span>&times;</span>
+                    </div>
+                    <input type="file" name="input_upload_avt" class="input-upload-avt" hidden="true">
+                    <button type="submit" class="post-box__btn btn-active">Đăng</button>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelector('.avt-current').src = Json_cookie.avatar
+
+    document.querySelector('.input-upload-avt').onchange = function(e){
+        if(e.target.files.length >0){
+                    let src = URL.createObjectURL(e.target.files[0])
+                    document.querySelector('.img-preview.avt').src = src
+                    document.querySelector('.img-preview.avt').style.display = 'block'
+                    document.querySelector('.avt-current').style.display = 'none'
+                    document.querySelector('.post-box__btn.btn-disable').classList.add('btn-active')
+                }
+    }
+    document.querySelector('.upload-btn').onclick =function(){
+        document.querySelector('.input-upload-avt').click()
+
+    }
+
+    document.querySelector('.form-upload-avt').action = `/change-avt/${Json_cookie.userId}`
+
+    document.querySelector('#close-avt-box').onclick = ()=>{
+        document.querySelector('.overplay.change-avt').style.display = 'none';
+    }
+
+</script>

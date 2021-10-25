@@ -96,5 +96,14 @@ class ApiController{
             res.json({dataUserLogined})
         })
     }
+    ChangeAvt(req,res){
+        console.log('change avatar...', req.file.path)
+        let newAvatar = '/uploads/' + req.file.filename
+        console.log('mew avt', newAvatar, req.params.uid)
+        UserModel.findOneAndUpdate({_id: req.params.uid}, {avatar: newAvatar}, ()=>{
+            console.log('Thanh cong')
+        })
+        res.render('wall-page')
+    }
 }
 module.exports = new ApiController

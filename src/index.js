@@ -32,8 +32,6 @@ ConnectDB()
 app.use(cookieParser());
 
 AllRoute(app)
-
-
 //==============================
 
 
