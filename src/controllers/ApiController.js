@@ -3,8 +3,23 @@ let PostModel = require('../models/Posts')
 let UserModel = require('../models/Users')
 
 class ApiController{
-    GetPosts(req,res){
+    GetAllPosts(req,res){
         PostModel.find({})
+        .then((data) => {
+            console.log('GET ALL POSTS DATA', data)
+
+            res.json(data)
+        })
+        .catch((err) => {
+            res.status(500).json({error: err})
+        })
+    }
+
+    GetUserLoginedPosts(req,res){
+        console.log('POST USER LOGIN', req.params.uid)
+        let userId = req.params.uid
+
+        PostModel.find({ uid: userId})
         .then((data) => {
             res.json(data)
         })

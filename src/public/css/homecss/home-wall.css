@@ -1,6 +1,6 @@
 .my-wall {
     margin-top: var(--header-height);
-    display: none;
+    /* display: none; */
     animation: fadeIn step-end 0.2s;
 }
 

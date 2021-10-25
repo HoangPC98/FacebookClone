@@ -9,7 +9,7 @@ let connectDB = async ()=>{
             useNewUrlParser: true,
             useUnifiedTopology: true,
         })
-        console.log('Connnect sucessfully to', URI)
+        console.log('Connnect sucessfully to DB')
     } catch (error) {
        console.log('Connection Failed: ' + error)
     }

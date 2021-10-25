@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/variables.css">
+    <link rel="stylesheet" href="/css/cute-alert.css">
+    <link rel="stylesheet" href="css/homecss/home-container.css">
+    <link rel="stylesheet" href="/css/homecss/switchmode.css">
+    <link rel="stylesheet" href="/css/homecss/home-wall.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <%- include('a-common-view-data') %>
+
+    <script>
+        isWallPage = true;
+        console.log('iswallpage Here', isWallPage)
+    </script>
+
+    <%- include('header') %>
+    
+    <section class="my-wall">
+        <section class="my-wall__head">
+            <div class="my-wall__top">
+                <div class="my-wall__top-bg--big">
+                    <div class="my-wall__top-bg">
+                        <img src="https://wallpapercave.com/wp/wp5070716.jpg" alt="" class="my-wall__top-bg-img">
+                        <div class="my-wall__top-bg__edit">
+                            <i class="fas fa-camera my-wall__top-bg__edit-icon"></i>
+                            <div class="my-wall__top-bg__edit-text">
+                                Chỉnh sửa ảnh bìa
+                            </div>
+                        </div>
+                    </div>
+                    <div class="my-wall__top-bg-avatar">
+                        <img src="" alt="" class="my-wall__top-bg-avatar__img avt">
+                        <div class="my-wall__top-bg-avatar__edit">
+                            <i class="fas fa-camera my-wall__top-bg-avatar__edit-icon"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="my-wall__top-info">
+                    <div class="my-wall__top-info-name full-name">
+                        Lê Hồ
+                    </div>
+                    <div class="my-wall__top-info-note">
+                        ˇ 2 5 ˇ
+                    </div>
+                    <div class="my-wall__top-info-btn">
+                        Chỉnh sửa
+                    </div>
+                </div>
+            </div>
+            <div class="my-wall__head-more">
+                <ul class="my-wall__head-more-list">
+                    <li class="my-wall__head-more-item">
+                        <div class="my-wall__head-more-item__title">
+                            Bài viết
+                        </div>
+                    </li>
+                    <li class="my-wall__head-more-item">
+                        <div class="my-wall__head-more-item__title">
+                            Giới thiệu
+                        </div>
+                    </li>
+                    <li class="my-wall__head-more-item">
+                        <div class="my-wall__head-more-item__title">
+                            Bạn bè
+                            <span>
+                                425
+                            </span>
+                        </div>
+                    </li>
+                    <li class="my-wall__head-more-item">
+                        <div class="my-wall__head-more-item__title">
+                            Ảnh
+                        </div>
+                    </li>
+                    <li class="my-wall__head-more-item">
+                        <div class="my-wall__head-more-item__title">
+                            Xem thêm
+                        </div>
+                    </li>
+                </ul>
+                <button class="my-wall__head-more-btn btn-active">
+                    <i class="fas fa-plus-circle"></i>
+                    Thêm vào tin
+                </button>
+                <div class="my-wall__head-more-edit">
+                    <i class="fas fa-pencil-alt"></i>
+                    <span>
+                        Chỉnh sửa trang cá nhân
+                    </span>
+                </div>
+                <div class="my-wall__head-more-setting">
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+            </div>
+        </section>
+        <secton class="my-wall__main">
+            <div class="my-wall__main-left">
+                <div class="my-wall__main-left__intro">
+                    <div class="main-left__heading">
+                        Giới thiệu
+                    </div>
+                    <div class="main-left__intro-content">
+                        <div class="main-left__intro-content-item">
+                            <div class="main-left__intro-content-item__img">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="main-left__intro-content-item__text">
+                                Tham gia vào tháng 9 năm 2014
+                            </div>
+                        </div>
+                        <div class="main-left__intro-content-item">
+                            <div class="main-left__intro-content-item__img">
+                                <i class="fas fa-wifi"></i>
+                            </div>
+                            <div class="main-left__intro-content-item__text">
+                                Có
+                                <span>379</span>
+                                người theo dõi
+                            </div>
+                        </div>
+                        <div class="main-left__intro-content-item">
+                            <div class="main-left__intro-content-item__btn">
+                                Chỉnh sửa chi tiết
+                            </div>
+                        </div>
+                        <div class="main-left__intro-content-item">
+                            <div class="main-left__intro-content__favorite">
+                                <div class="main-left__intro-content-item__img">
+                                    <i style="color: #20c4f3;" class="fas fa-globe"></i>
+                                </div>
+                                <div class="main-left__intro-content-item__text">
+                                        Học tiếng Việt
+                                </div>
+                            </div>
+                            <div class="main-left__intro-content__favorite">
+                                <div class="main-left__intro-content-item__img">
+                                    <i style="color: #3b3b3b;" class="fas fa-laptop"></i>
+                                </div>
+                                <div class="main-left__intro-content-item__text">
+                                        Học viết mã
+                                </div>
+                            </div>
+                        </div>
+                        <div class="main-left__intro-content-item">
+                            <div class="main-left__intro-content-item__btn">
+                                Chỉnh sửa sở thích
+                            </div>
+                        </div>
+                        <div class="main-left__intro-content-item">
+                            <div class="main-left__intro-content-item__btn">
+                                Thêm nội dung đáng chú ý
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="my-wall__main-left__gallery">
+                    <div class="main-left__gallery-head">
+                        <div class="main-left__heading">
+                            Ảnh
+                        </div>
+                        <div class="main-left__more">
+                            Xem tất cả ảnh
+                        </div>
+                    </div>
+                    <ul class="main-left__gallery-pictures">
+                        <li class="main-left__pictures-item">
+                            <img src="./assets/img/wall/wall-1.jpg" alt="" class="main-left__pictures-item-img">
+                        </li>
+                        <li class="main-left__pictures-item">
+                            <img src="./assets/img/wall/wall-2.jpg" alt="" class="main-left__pictures-item-img">
+                        </li>
+                        <li class="main-left__pictures-item">
+                            <img src="./assets/img/wall/wall-3.jpg" alt="" class="main-left__pictures-item-img">
+                        </li>
+                    </ul>
+                </div>
+                <div class="my-wall__main-left__friends">
+                    <div class="main-left__friends-head">
+                        <div class="main-left__heading">
+                            Bạn bè
+                            <div class="main-left__heading-sub">
+                                425 người bạn
+                            </div>
+                        </div>
+                        <div class="main-left__more">
+                            Xem tất cả bạn bè
+                        </div>
+                    </div>
+                    <ul class="main-left__friends-list">
+                        <li class="main-left__friends-item">
+                            <div class="main-left__friends-item-avatar">
+                                <img src="./assets/img/wall/user-1.jpg" alt="" class="imgmain-left__friends-img">
+                            </div>
+                            <div class="main-left__friends-item-text">
+                                Ali
+                            </div>
+                        </li>
+                        <li class="main-left__friends-item">
+                            <div class="main-left__friends-item-avatar">
+                                <img src="./assets/img/wall/user-2.jpg" alt="" class="imgmain-left__friends-img">
+                            </div>
+                            <div class="main-left__friends-item-text">
+                                Beatriz
+                            </div>
+                        </li>
+                        <li class="main-left__friends-item">
+                            <div class="main-left__friends-item-avatar">
+                                <img src="./assets/img/wall/user-3.jpg" alt="" class="imgmain-left__friends-img">
+                            </div>
+                            <div class="main-left__friends-item-text">
+                                Charles
+                            </div>
+                        </li>
+                        <li class="main-left__friends-item">
+                            <div class="main-left__friends-item-avatar">
+                                <img src="./assets/img/wall/user-4.jpg" alt="" class="imgmain-left__friends-img">
+                            </div>
+                            <div class="main-left__friends-item-text">
+                                Diya
+                            </div>
+                        </li>
+                        <li class="main-left__friends-item">
+                            <div class="main-left__friends-item-avatar">
+                                <img src="./assets/img/wall/user-5.jpg" alt="" class="imgmain-left__friends-img">
+                            </div>
+                            <div class="main-left__friends-item-text">
+                                Eric
+                            </div>
+                        </li>
+                        <li class="main-left__friends-item">
+                            <div class="main-left__friends-item-avatar">
+                                <img src="./assets/img/wall/user-6.jpg" alt="" class="imgmain-left__friends-img">
+                            </div>
+                            <div class="main-left__friends-item-text">
+                                Fatima
+                            </div>
+                        </li>
+                        <li class="main-left__friends-item">
+                            <div class="main-left__friends-item-avatar">
+                                <img src="./assets/img/wall/user-7.jpg" alt="" class="imgmain-left__friends-img">
+                            </div>
+                            <div class="main-left__friends-item-text">
+                                Gabriel
+                            </div>
+                        </li>
+                        <li class="main-left__friends-item">
+                            <div class="main-left__friends-item-avatar">
+                                <img src="./assets/img/wall/user-8.jpg" alt="" class="imgmain-left__friends-img">
+                            </div>
+                            <div class="main-left__friends-item-text">
+                                Hanna
+                            </div>
+                        </li>
+                        <li class="main-left__friends-item">
+                            <div class="main-left__friends-item-avatar">
+                                <img src="./assets/img/wall/user-9.jpg" alt="" class="imgmain-left__friends-img">
+                            </div>
+                            <div class="main-left__friends-item-text">
+                                Hiddleston
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <footer class="my-wall__main-left__footer">
+                    <span>
+                        Quyền riêng tư
+                    </span>
+                    ·
+                    <span>
+                        Điều khoản
+                    </span>
+                    · 
+                    <span>
+                        Quảng cáo
+                    </span>   
+                    ·
+                    <span>
+                        Cookie
+                    </span>   
+                    · 
+                    <span>
+                        Chính sách
+                    </span> 
+                    ·
+                    Facebook © 2021
+                </footer>
+            </div>
+            <div class="my-wall__main-right">
+                <div class="main-right__option">
+                    <div class="main-right__option-head">
+                        <div class="main-right__option-head__title">
+                            Bài viết
+                        </div>
+                        <div class="main-right__option-head__more">
+                            <div class="main-right__option-head__more-btn">
+                                <div class="main-right__option-head__more-btn-icon">
+                                    <i class="fas fa-sliders-h"></i>
+                                </div>
+                                <div class="main-right__option-head__more-btn-text">
+                                    Bộ lọc
+                                </div>
+                            </div>
+                            <div class="main-right__option-head__more-btn">
+                                <div class="main-right__option-head__more-btn-icon">
+                                    <i class="fas fa-cogs"></i>
+                                </div>
+                                <div class="main-right__option-head__more-btn-text">
+                                    Quản lí bài viết
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main-right__option-select">
+                        <div class="main-right__option-item active">
+                            <div class="main-right__option-select-item">
+                                <div class="main-right__option-select-item__icon">
+                                    <i class="fas fa-bars"></i>
+                                </div>
+                                <div class="main-right__option-select-item__text">
+                                    Xem theo danh sách
+                                </div>
+                            </div>
+                        </div>
+                        <div class="main-right__option-item">
+                            <div class="main-right__option-select-item">
+                                <div class="main-right__option-select-item__icon">
+                                    <i class="fas fa-th-large"></i>
+                                </div>
+                                <div class="main-right__option-select-item__text">
+                                    Chế độ xem lưới
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="main-right__newsfeed newf-list">
+                    
+                </div>
+                <%- include('postnew-overlay') %>
+
+                <%- include('postnew') %>
+               
+                <%- include('post-item') %>
+
+                
+            </div>
+        </secton>
+    </section>  
+
+<script>
+    document.querySelector('.my-wall__top-bg-avatar__img.avt').src = Json_cookie.avatar
+    $('.my-wall__top-info-name.full-name').html(Json_cookie.userName)
+</script>
+</body>
+</html>
+
+
+
+ 
+

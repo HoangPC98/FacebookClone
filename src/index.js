@@ -4,9 +4,13 @@ const bodyParser = require('body-parser');
 const ejs = require('ejs')
 const ejsLayouts = require('express-ejs-layouts')
 const cookieParser = require('cookie-parser');
+const AllRoute = require('./routes/all-route')
+
+require('dotenv').config()
+
 app = express();
 
-let port = 5000
+let port = 3003
 
 // body-parser
 app.use(bodyParser.urlencoded({extended: true}));
@@ -27,48 +31,11 @@ ConnectDB()
 // cookie parser
 app.use(cookieParser());
 
-// app.get('/', (req,res)=>{
-//     res.render('postnew.ejs')
-// })
-
-let route = require('./routes/route-index.js')
-// route(app)
-
-let AuthenController = require('./controllers/AuthenController')
-let PostController = require('./controllers/PostController')
-let ApiController = require('./controllers/ApiController')
-let SiteController = require('./controllers/SiteController')
-
-// Routes
-app.get('/', (req,res)=>{
-    res.render('auth',{error:''})
-})
-
-app.get('/home', SiteController.GetHome, SiteController.NextIfGetHomeFail)
-
-app.post('/signup', AuthenController.PostSignUp)
-
-app.post('/login', AuthenController.PostLogIn)
-
-app.post('/postnews', PostController.SubmitPostNews)
-
-app.post('/like-change', PostController.LikeChange)
-
-app.post('/post-comment', PostController.PostComment)
-
-app.post('/get-data-user-logined', ApiController.GetDataUserLogined)
-
-// app.post('/search', ApiController.PostSearch)
-
-// Seacrh Input
-
-app.get('/search', ApiController.GetSearch)
+AllRoute(app)
 
 
-// Call API to Get data
-app.get('/api/posts', ApiController.GetPosts)
-app.get('/api/get-user-display', ApiController.GetUserDisplay)
-app.get('/api/get-comments/:postid', ApiController.GetCommentViaPostId)
+//==============================
+
 
 // listen server running
 app.listen(port, ()=> {
@@ -77,4 +44,11 @@ app.listen(port, ()=> {
 
 
 // =================================================================================================
+
+// - Dependences/modules
+
+// - Upload file to DB
+// multer
+// multer-gridfs-storage 
+// gridfs-stream
 

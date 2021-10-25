@@ -12,9 +12,11 @@ class PostController{
                 const postData = new PostModel({
                     uid: dataUser._id,
                     content: req.body.content,
+                    // img: req.file.filename,
+
                     userInfo:{
                         userName: dataUser.userName,
-                        avatarUrl: dataUser.avatar,
+                        avatarUrl:  dataUser.avatar,
                     }
                 })
                 postData.save()

@@ -9,21 +9,19 @@
 
 <script>
     // fetch API Posts
+    console.log('iswallpage', isWallPage)
+    if(isWallPage) 
+        PostApi = `/api/user-logined-posts/${Json_cookie.userId}`
+    else
+        PostApi = '/api/all-posts'
 
-    let exdate = new Date();
-    exdate = exdate.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: '2-digit'
-    })
-    console.log(exdate)
-    let PostApi = '/api/posts'
     async function CallApi() {
         await fetch(PostApi)
             .then(response => {
                 return response.json()
             })
             .then(data => {
+                console.log('DATA POST USER LOGIN', data)
                 let posts_data = []
                 data.map(item => {
                     // console.log( item.createdAt.toLocaleDateString('en-US',{ year: 'numeric', month: 'long', day: '2-digit'}))
@@ -54,7 +52,7 @@
             console.log('like Status', likeStatus)
 
             // Call ListComment API 
-
+            
 
             let item_append = `
             <div class="newsfeed item-post" id="${item._id}">

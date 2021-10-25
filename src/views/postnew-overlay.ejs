@@ -38,19 +38,20 @@
                         Thêm vào bài viết
                     </div>
                     <div class="post-box__add-more">
-                        <div class="post-box__add-icon uploadfile">
-                            <input type="file" class="input-upload" hidden="hidden">
-                            <i style="color: #45bd62;" class="fas fa-images"></i>
-                        </div>
-                        <div class="post-box__add-icon">
-                            <i style="color: #f7b928;" class="fas fa-laugh"></i>
-                        </div>
-                        <div class="post-box__add-icon">
-                            <i style="color: #f5533d;" class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div class="post-box__add-icon">
-                            <i style="color: #717880;" class="fas fa-ellipsis-h"></i>
-                        </div>
+                            <div class="post-box__add-icon uploadfile">
+                                <input type="file" class="input-upload" name="image" id="image" hidden="hidden">
+                                <i style="color: #45bd62;" class="fas fa-images"></i>
+                            </div>
+                            <div class="post-box__add-icon">
+                                <i style="color: #f7b928;" class="fas fa-laugh"></i>
+                            </div>
+                            <div class="post-box__add-icon">
+                                <i style="color: #f5533d;" class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="post-box__add-icon">
+                                <i style="color: #717880;" class="fas fa-ellipsis-h"></i>
+                            </div>
+                            <!-- <button type="submit" class="btn-submit-file">SUBMIT</button> -->
                     </div>
                 </div>
                 <button class="post-box__btn btn-disable">Đăng</button>
@@ -76,6 +77,15 @@
         }  
     }
 
+    // Upload FIle
+    document.querySelector('.post-box__add-icon.uploadfile').onclick = ()=>{
+        console.log('hahahaha')
+        document.querySelector('.input-upload').click()
+    }
+
+ 
+
+
     function getCookie(cName) {
         const name = cName + "=";
         const cDecoded = decodeURIComponent(document.cookie); //to be careful
@@ -86,28 +96,38 @@
         })
         return res
     }
-    $('.post-box__btn').click (()=>{
+   
         
-        let uid = getCookie('user_logined')
-        uid = JSON.parse(uid).userId
-        console.log('uid',uid)
-        let content = $('.post-box__content-textarea').val()
-        let datetime = new Date().toLocaleDateString('en-US',{ year: 'numeric', month: 'long', day: '2-digit'})
-        let dataPost ={uid, content, datetime}
-        let options = {
-            method: 'POST',
-            headers: { "Content-type": "application/json; charset=UTF-8" },
-            body: JSON.stringify(dataPost)
-        }
+        // document.querySelector('.overplay.post-new').style.display = 'none'
 
-        fetch('/postnews', options)
-        .then(res=>{
-            if(!res.ok) 
-                console.error(res)
-            else 
-                res.json()
+        $('.post-box__btn').click(function(){
+            let uid = getCookie('user_logined')
+            uid = JSON.parse(uid).userId
+            console.log('uid',uid)
+            let content = $('.post-box__content-textarea').val()
+            let datetime = new Date().toLocaleDateString('en-US',{ year: 'numeric', month: 'long', day: '2-digit'})
+            let dataPost ={uid, content, datetime}
+            let options = {
+                method: 'POST',
+                headers: { "Content-type": "application/json; charset=UTF-8" },
+                body: JSON.stringify(dataPost)
+            }
+
+            fetch('/postnews', options)
+            .then(res=>{
+                if(!res.ok){
+                    console.error(res)
+                    console.log('post that bai')
+                    
+                }
+                else{
+                    console.log('post thanh cogn')
+                    res.json()
+
+                }
+            })
+
+            document.querySelector('.overplay.post-new').style.display = 'none'
+
         })
-
-        document.querySelector('.overplay.post-new').style.display = 'none'
-    })
 </script>
