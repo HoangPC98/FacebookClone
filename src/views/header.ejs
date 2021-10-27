@@ -1,5 +1,6 @@
 
 <link rel="stylesheet" href="/css/header.css">
+
 <header class="header">
     <div class="header-grid">
         <div class="header-left">
@@ -55,8 +56,11 @@
 
         <ul class="header-right">
             <li class="header-right__profile nav-wall">
-                <img src="" class="header-profile__img avt" id="header-avatar">
-                <span class="header-profile__name last-name"></span>
+                <a href="/profile/me" class="link-profile a-non-decor flex-roww">
+                    <img src="" class="header-profile__img avatar-img-logined" id="header-avatar">
+                    <span class="header-profile__name user-name-text-logined "></span>
+                </a>
+                
             </li>
             <li class="header-right__item plus">
                 <i class="fas fa-plus header-right__item-plus"></i>
@@ -218,11 +222,11 @@
                     </div>
                 </div>
             </li>
-            <li class="header-right__item">
+            <li class="header-right__item caret-down-btn">
                 <i class="fas fa-caret-down header-right__item-caret-down"></i>
                 <div class="header-right__item-more header-right__setting">
                     <div class="setting-head nav-wall">
-                        <img src="" alt="" class="avt setting-head__avatar">
+                        <img src="" alt="" class="setting-head__avatar avatar-img-logined">
                         <div class="setting-head__content">
                             <p class="setting-head__content-name full-name">
                                Default UserName
@@ -316,11 +320,13 @@
 </header>
 
 <script>
-    console.log('HEADER DATAass', Json_cookie)
-    $('.header-profile__name.last-name').html(Json_cookie.userName)
-    console.log('src avt', Json_cookie.avatar)
-    document.getElementById('header-avatar').setAttribute('src', Json_cookie.avatar)
+    console.log('HEADER DATA...', Json_cookie)
+  
+    // Set Avatar for User Logined
 
+    // document.querySelectorAll('.avatar-img-logined').forEach(img => {
+    //     img.src = dataUserLogin.avatar
+    // })
     // SearchBox Input : OnInput
     $('#search-input').on('keydown', function(e){
         console.log('key:', e.key)
@@ -338,6 +344,7 @@
 
     // Click to Caret-down : show logout button
     $('.header-right__item').click(function(){
+        console.log('LOGUT..........')
         if(this.classList.contains('active')){
             this.classList.remove('active')
         }
@@ -370,10 +377,13 @@
             
         }
     })
-
     // User goto Wall-page button
     $('.header-right__profile.nav-wall').click(function(){
         window.location.href = "/wall-page"
     })
+
+    // $('.header-profile__name.last-name').html(Json_cookie.userName)
+    // console.log('src avt', Json_cookie.avatar)
+    // document.getElementById('header-avatar').setAttribute('src', dataUserLogin.avatar)
 
 </script>

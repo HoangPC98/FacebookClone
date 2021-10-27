@@ -39,6 +39,7 @@ class AuthenController{
                 let userName = data.userName
                 let password = data.password
                 let avatar = data.avatar
+                console.log('avatar...', avatar, typeof avatar)
                 let user_logined = {
                     userId,
                     userName,
@@ -46,8 +47,8 @@ class AuthenController{
                     avatar,
                 }
                 user_logined = JSON.stringify(user_logined)
-                console.log('cookie userlogined',user_logined)
-                res.cookie('user_logined', user_logined).render('main', {data: data})
+                console.log('cookie userlogined', data)
+                res.cookie('user_logined', user_logined).render('main', {dataUserLogin: data})
             }
             else{
                 res.render('auth',{error:'Đăng nhập thất bại, Tên đăng nhập hoặc mật khẩu không đúng'})

@@ -6,7 +6,6 @@ class ApiController{
     GetAllPosts(req,res){
         PostModel.find({})
         .then((data) => {
-            console.log('GET ALL POSTS DATA', data)
 
             res.json(data)
         })
@@ -16,7 +15,7 @@ class ApiController{
     }
 
     GetUserLoginedPosts(req,res){
-        console.log('POST USER LOGIN', req.params.uid)
+        console.log('POST USER LOGIN...', req.params.uid)
         let userId = req.params.uid
 
         PostModel.find({ uid: userId})
@@ -84,8 +83,8 @@ class ApiController{
     }
 
     GetDataUserLogined(req,res){
-        console.log('get data user.........', req.body)
-        UserModel.findOne({_id: req.body.uid_logined})
+        console.log('get data user [][]w[][w]e[', req.params.uid)
+        UserModel.findOne({_id: req.params.uid})
         .then(data=>{
             let dataUserLogined = {
                 uid: data._id,
@@ -93,9 +92,10 @@ class ApiController{
                 avatar: data.avatar
             }
             console.log('datauser',dataUserLogined)
-            res.json({dataUserLogined})
+            res.json(dataUserLogined)
         })
     }
+
     ChangeAvt(req,res){
         console.log('change avatar...', req.file.path)
         let newAvatar = '/uploads/' + req.file.filename
@@ -103,7 +103,7 @@ class ApiController{
         UserModel.findOneAndUpdate({_id: req.params.uid}, {avatar: newAvatar}, ()=>{
             console.log('Thanh cong')
         })
-        res.render('wall-page')
+        res.redirect('/profile/me')
     }
 }
 module.exports = new ApiController

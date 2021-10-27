@@ -59,6 +59,11 @@ function AllRoute(app){
     })
 
     app.get('/home', SiteController.GetHome, SiteController.NextIfGetHomeFail)
+
+    // Truy cập trang cá nhân của User Logined
+    // app.get('/profile/me', SiteController.GetProfileMePage)
+
+    app.get('/profile/:uid', SiteController.GetProfileUid)
     
     app.post('/signup', AuthenController.PostSignUp)
     
@@ -68,7 +73,9 @@ function AllRoute(app){
 
     app.post('/post-comment', PostController.PostComment)
 
-    app.post('/get-data-user-logined', ApiController.GetDataUserLogined)
+    // app.post('/get-data-user-logined', ApiController.GetDataUserLogined)
+    app.get('/get-data-user-logined/:uid', ApiController.GetDataUserLogined)
+
 
     app.post('/change-avt/:uid', upload.single('input_upload_avt'), ApiController.ChangeAvt)
 
@@ -81,7 +88,7 @@ function AllRoute(app){
 
     // Call API to Get data
     app.get('/api/all-posts', ApiController.GetAllPosts)
-    app.get('/api/user-logined-posts/:uid', ApiController.GetUserLoginedPosts)
+    app.get('/api/get-user-logined-posts/:uid', ApiController.GetUserLoginedPosts)
     app.get('/api/get-user-display', ApiController.GetUserDisplay)
     app.get('/api/get-comments/:postid', ApiController.GetCommentViaPostId)
     

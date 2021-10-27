@@ -1,4 +1,5 @@
-
+const UserModel = require('../models/Users')
+const PostModel = require('../models/Posts')
 
 class SiteController{
     GetHome(req,res,next){
@@ -17,6 +18,40 @@ class SiteController{
         // res.render('main')
         // next()
     }
+
+    GetProfileMePage(req,res){
+        res.render('profile-page')
+    }
+
+    GetProfileUid(req,res){  
+        let uid = req.params.uid
+        var dataUser
+        var dataPosts
+        UserModel.findOne({_id: uid})
+        .then(data_user => {
+            dataUser = {
+                uid: data_user._id,
+                userName: data_user.userName,
+                avatar: data_user.avatar,
+                gender: data_user.gender
+            }
+            PostModel.find({uid: req.params.uid})
+            .then(data_posts=>{
+                dataPosts = data_posts
+                let dataProfile = JSON.stringify(dataUser)
+                res.cookie('data_profile', dataProfile).render('profile-page',{viewdata:{dataUser:dataUser, dataPosts:dataPosts}})
+            })
+            .catch(err=>{
+                res.json({'err:' : err})
+            })
+        })
+        .catch(err=>{
+            res.json({'err:' : err})
+        })
+      
+
+    }
+
     NextIfGetHomeFail(req,res){
         res.render('main')
     }

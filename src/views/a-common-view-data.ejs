@@ -1,10 +1,37 @@
 
-<script>
 
+
+<script>
+   
+    function getCookie(name) {
+           // Split cookie string and get all individual name=value pairs in an array
+           var cookieArr = document.cookie.split(";");
+           for(var i = 0; i < cookieArr.length; i++) {
+               var cookiePair = cookieArr[i].split("=");
+               if(name == cookiePair[0].trim()) {
+                   return decodeURIComponent(cookiePair[1]);
+               }
+           }
+           return null;
+    }
+    function delete_cookie(name) {
+        document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    }
+
+
+    var cookie_logined = getCookie('user_logined')   
+    var Json_cookie = JSON.parse(cookie_logined)
+    console.log('cookie login...',Json_cookie)
+    var dataUserId = Json_cookie.userId
+    var dataUserLogin
+
+    var cookie_profile = getCookie('data_profile')
+    cookie_profile = JSON.parse(cookie_profile)
+    console.log('cookie_profile...',cookie_profile)
+   
     // isWallPage
-    let isWallPage = false;
     
-    let FetchPostData = function (apiUrl, data) {
+    FetchPostData = function (apiUrl, data) {
        // console.log('data passed', data)
        let post = {
            method: 'POST',
@@ -28,7 +55,7 @@
    }
 
    // Fetch GetData
-   let FetchGetData = async function (apiUrl){
+    FetchGetData = async function (apiUrl){
        await fetch(apiUrl)
        .then(response => {
            return response.json()
@@ -42,21 +69,4 @@
            console.log('ERROR SERVER: ',error )
        })
    }
-
-   // GetCookieByName
-    function getCookie(name) {
-           // Split cookie string and get all individual name=value pairs in an array
-           var cookieArr = document.cookie.split(";");
-           for(var i = 0; i < cookieArr.length; i++) {
-               var cookiePair = cookieArr[i].split("=");
-               if(name == cookiePair[0].trim()) {
-                   return decodeURIComponent(cookiePair[1]);
-               }
-           }
-           return null;
-    }
-    let cookie_logined = getCookie('user_logined')   
-    let Json_cookie = JSON.parse(cookie_logined)
-    console.log('cookie login',Json_cookie.userName)
-    let dataUserId = Json_cookie.userId
 </script>

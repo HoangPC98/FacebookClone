@@ -4,7 +4,6 @@
    <div class="overplay post-new">
     <div class="overplay-body">
         
-        <!-- Box news feed -->
         <div class="post-box">
             <div class="post-box__head">
                 <h3 class="post-box__head-text">
@@ -16,9 +15,9 @@
             </div>
             <div class="post-box__main">
                 <div class="post-box__info">
-                    <img src="" alt="" class="avt post-box__avatar" id="avatar-postnew-overlay">    
+                    <img src="" alt="" class="post-box__avatar avatar-img-logined" id="avatar-postnew-overlay">    
                     <div class="post-box__info-info">
-                        <p class="post-box__info-name full-name">
+                        <p class="post-box__info-name user-name-text">
                 
                         </p>
                         <div class="post-box__info-object">
@@ -69,81 +68,37 @@
 </div>
 
 <script>
-    document.querySelector('#close-post-box').onclick = ()=>{
+    document.querySelector('#close-post-box').onclick = () => {
         document.querySelector('.overplay.post-new').style.display = 'none';
     }
-    document.querySelector('.post-box__info-name.full-name').innerHTML = Json_cookie.userName
-    document.querySelector('#avatar-postnew-overlay').src = Json_cookie.avatar
-    document.querySelector('.post-box__content-textarea').oninput = function(e){
-        if(e.target.value != ''){
+    document.querySelector('.post-box__content-textarea').oninput = function (e) {
+        if (e.target.value != '') {
             console.log('ok nha')
             document.querySelector('.post-box__btn').classList.add('btn-active');
-        }
-        else{
+        } else {
             document.querySelector('.post-box__btn').classList.remove('btn-active')
-        }  
+        }
     }
-
-    // Upload FIle
-    document.querySelector('.post-box__add-icon.uploadfile').onclick = ()=>{
+      // Upload FIle
+      document.querySelector('.post-box__add-icon.uploadfile').onclick = () => {
         console.log('hahahaha')
         document.querySelector('.input-upload').click()
     }
-
- 
-
-
-    function getCookie(cName) {
-        const name = cName + "=";
-        const cDecoded = decodeURIComponent(document.cookie); //to be careful
-        const cArr = cDecoded.split('; ');
-        let res;
-        cArr.forEach(val => {
-            if (val.indexOf(name) === 0) res = val.substring(name.length);
-        })
-        return res
+     // document.querySelector('.overplay.post-new').style.display = 'none'
+     document.querySelector('.input-upload').onchange = function (e) {
+        if (e.target.files.length > 0) {
+            let src = URL.createObjectURL(e.target.files[0])
+            document.querySelector('.img-preview').src = src
+            document.querySelector('.img-preview').style.display = 'block'
+        }
     }
-   
-        
-        // document.querySelector('.overplay.post-new').style.display = 'none'
-        document.querySelector('.input-upload').onchange = function(e){
-            if(e.target.files.length >0){
-                let src = URL.createObjectURL(e.target.files[0])
-                document.querySelector('.img-preview').src = src
-                document.querySelector('.img-preview').style.display = 'block'
-            }
-        }
-
-        
-
-        document.querySelector('.post-box__btn').onclick = function(){
-            document.querySelector('.uid-post').value = Json_cookie.userId
-            document.querySelector('.date-time-post').value = Date.now()
-            document.querySelector('.form-submit-new-post').submit()
-            document.querySelector('.overplay.post-new').style.display = 'none'
-            // let content = $('.post-box__content-textarea').val()
-            // let datetime = new Date().toLocaleDateString('en-US',{ year: 'numeric', month: 'long', day: '2-digit'})
-            // let dataPost ={uid, content, datetime}
-            // let options = {
-            //     method: 'POST',
-            //     headers: { "Content-type": "application/json; charset=UTF-8" },
-            //     body: JSON.stringify(dataPost)
-            // }
-
-            // fetch('/postnew', options)
-            // .then(res=>{
-            //     if(!res.ok){
-            //         console.error(res)
-            //         console.log('post that bai')
-                    
-            //     }
-            //     else{
-            //         console.log('post thanh cogn')
-            //         res.json()
-
-            //     }
-            // })
 
 
-        }
+
+    document.querySelector('.post-box__btn').onclick = function () {
+        document.querySelector('.uid-post').value = Json_cookie.userId
+        document.querySelector('.date-time-post').value = Date.now()
+        document.querySelector('.form-submit-new-post').submit()
+        document.querySelector('.overplay.post-new').style.display = 'none'
+    }
 </script>

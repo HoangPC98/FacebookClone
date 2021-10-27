@@ -7,18 +7,28 @@ const UserModel = require('../models/Users')
 
 class PostController{
     SubmitPostNews(req, res, next){
-        console.log('request payload', req.file.path)
+        console.log('request payload')
         res.send('post success')
         var uid = req.body.uid   
-        let path = '/uploads/' + req.file.filename
-
-        console.log('path...',path)
-        const postData = new PostModel({
-            uid: uid,
-            content: req.body.content,
-            img: path,
+        if(req.file){
+            var path = '/uploads/' + req.file.filename
+        }
+        UserModel.findOne({_id: uid})
+        .then(data => {
+            const postData = new PostModel({
+                uid: uid,
+                userInfo: {
+                    uid: data._id,
+                    userName: data.userName,
+                    avatar: data.avatar
+                },
+                content: req.body.content,
+                img: path,
+            })
+            postData.save()
         })
-        postData.save()
+        console.log('path...',path)
+      
   
         PostModel.findOne({uid: uid})
         .then(data =>{

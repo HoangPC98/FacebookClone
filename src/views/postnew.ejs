@@ -1,7 +1,7 @@
 
-<div class="container-posts">
+<div class="container-posts" >
     <div class="posts__new-post">
-        <img src="" alt="" class="avt posts__new-post-img nav-wall" id="avatar-postnew">
+        <img src="" alt="" class="posts__new-post-img nav-wall avatar-img-logined" id="avatar-postnew">
         <button class="new-post-btn posts__new-post-btn">
             Bạn đang nghĩ gì thế ?
             
@@ -30,4 +30,9 @@
     }
     $('.avt posts__new-post-img nav-wall').src = Json_cookie.avatar
     document.querySelector('#avatar-postnew').src = Json_cookie.avatar
+
+    // Check display
+    console.log('is...', Json_cookie, cookie_profile, )
+    // document.querySelector('.container-posts').style.display = Json_cookie.userId == cookie_profile.uid ? 'block' : 'none'
+
 </script>
