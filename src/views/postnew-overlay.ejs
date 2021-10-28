@@ -9,7 +9,7 @@
                 <h3 class="post-box__head-text">
                     Tạo bài viết
                 </h3>
-                <span class="post-box__head-close" id="close-post-box">
+                <span class="post-box__head-close close-box" id="close-post-box">
                     <i class="fas fa-times"></i>
                 </span>
             </div>
@@ -32,9 +32,12 @@
                         <textarea name="content" placeholder="Bạn đang nghĩ gì thế ?" type="text" class="post-box__content-textarea" style="min-height: 40px;"></textarea>
                         <input type="hidden" class="uid-post" name="uid" value="">
                         <input type="hidden" class="date-time-post" name="date_time_post" value="">
+                        <span class="post-box__head-close" id="cancel-upload-img" style="display: none; font-size:23px; width:30px ; height:30px; position: relative; bottom:-33px;">
+                            <i class="fas fa-times"></i>
+                        </span>
                         <div class="post-box__content-img">
                             <img class="img-preview" src="" width="100%" alt="">
-                            <span>&times;</span>
+                            
                         </div>
                     </div>
                     <div class="post-box__add">
@@ -90,10 +93,17 @@
             let src = URL.createObjectURL(e.target.files[0])
             document.querySelector('.img-preview').src = src
             document.querySelector('.img-preview').style.display = 'block'
+            document.querySelector('#cancel-upload-img').style.display = 'flex'
+            console.log(this.value)
         }
     }
 
-
+    document.querySelector('#cancel-upload-img').onclick = function(){
+        console.log('asdlsfnvd.adsfgd')
+        document.querySelector('.input-upload').value = ''
+        document.querySelector('.img-preview').style.display = 'none'
+        this.style.display = 'none'
+    }
 
     document.querySelector('.post-box__btn').onclick = function () {
         document.querySelector('.uid-post').value = Json_cookie.userId

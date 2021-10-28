@@ -8,7 +8,6 @@ const UserModel = require('../models/Users')
 class PostController{
     SubmitPostNews(req, res, next){
         console.log('request payload')
-        res.send('post success')
         var uid = req.body.uid   
         if(req.file){
             var path = '/uploads/' + req.file.filename
@@ -36,11 +35,9 @@ class PostController{
         })
         .catch(err =>{
             console.log('ERROR Catched:',err)
-        })
-                
-     
-          
-      
+        })    
+
+        res.redirect('/home')
     }
     LikeChange(req,res) {
         console.log('req.body: ',req.body)
@@ -123,6 +120,29 @@ class PostController{
         .catch(err =>{
             console.log('ERROR Database:',err)
         })
+    }
+
+    DeletePost(req,res){
+        console.log('DELETE....')
+        PostModel.findOne({_id: req.params.pid}, (err, data)=>{
+            data.remove()
+        })
+        res.json({message: 'Thanh cong'})
+    }
+
+    EditPost(req,res){
+        console.log('req....', req.body, req.file)
+        // Nếu có thay đổi img
+        if(req.file){
+            let pathFileUploaded = '/uploads/' + req.file.filename
+            PostModel.findOneAndUpdate({_id: req.params.pid},{content: req.body.content, img: pathFileUploaded}, (err, data)=>{console.log('Da Upadate')})
+        }
+
+        // Nếu ko chỉ thay đổi content
+        else
+            PostModel.findOneAndUpdate({_id: req.params.pid},{content: req.body.content}, (err, data)=>{console.log('Da Upadate')})
+
+        res.redirect('/home')
     }
 }
 

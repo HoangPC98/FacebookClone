@@ -9,8 +9,8 @@
             </div>
         </div>
         <div class="container-right__page-item">
-            <img src="./assets/img/Home/avatar-notify-4.jpg" alt="" class="container-right__page-item-avatar">
-            <span class="container-right__page-item-title">Titan Gaming</span>
+            <img src="https://pluspng.com/img-png/nodejs-logo-png-show-images-in-console-with-node-js-console-png-600.png" alt="" class="container-right__page-item-avatar">
+            <span class="container-right__page-item-title">NodeJS Medeia</span>
         </div>
         <div class="container-right__page-ads">
             <div class="container-right__page-ads-img">
@@ -25,55 +25,37 @@
     <div class="container-right__connect">
         <div class="container-right__connect-head">
             <p class="container-right__connect-head-text">
-                Người liên hệ
+                Đang online
             </p>
             <div class="container-right__connect-head-more more-dots">
                 <i class="fas fa-ellipsis-h"></i>
             </div>
         </div>
         <ul class="container-right__connect-list">
-            <li class="container-right__connect-item">
-                <div class="container-right__connect-item-avatar">
-                    <img src="./assets/img/Home/user-1.jpg" alt="" class="container-right__connect-item-img">
-                </div>
-                <span class="container-right__connect-item-name">Nguyễn Hoàng Uyên My</span>
-            </li>
-            <li class="container-right__connect-item">
-                <div class="container-right__connect-item-avatar">
-                    <img src="" alt="" class="container-right__connect-item-img">
-                </div>
-                <span class="container-right__connect-item-name">Dương Hoàng Phi Long</span>
-            </li>
-            <li class="container-right__connect-item">
-                <div class="container-right__connect-item-avatar">
-                    <img src="" alt="" class="container-right__connect-item-img">
-                </div>
-                <span class="container-right__connect-item-name">An Lê</span>
-            </li>
-            <li class="container-right__connect-item">
-                <div class="container-right__connect-item-avatar">
-                    <img src="" alt="" class="container-right__connect-item-img">
-                </div>
-                <span class="container-right__connect-item-name">Nhật Hào</span>
-            </li>
-            <li class="container-right__connect-item">
-                <div class="container-right__connect-item-avatar">
-                    <img src="" alt="" class="container-right__connect-item-img">
-                </div>
-                <span class="container-right__connect-item-name">Trương Thành Đạt</span>
-            </li>
-            <li class="container-right__connect-item">
-                <div class="container-right__connect-item-avatar">
-                    <img src="" alt="" class="container-right__connect-item-img">
-                </div>
-                <span class="container-right__connect-item-name">Phú Dừa</span>
-            </li>
-            <li class="container-right__connect-item">
-                <div class="container-right__connect-item-avatar">
-                    <img src="" alt="" class="container-right__connect-item-img">
-                </div>
-                <span class="container-right__connect-item-name">Phước Thịnh Nguyễn</span>
-            </li>
+            
         </ul>
     </div>
 </section>
+
+<script>
+    fetch('/get-all-user')
+    .then(response => {
+        return response.json()
+    })
+    .then(data => {
+        let All_User = data
+        console.log('ALL USER',All_User)
+        All_User.map(user =>{
+            document.querySelector('.container-right__connect-list').innerHTML += `
+            <li class="container-right__connect-item">
+                <a class="a-non-decor flex-roww" href="/profile/${user._id}">
+                    <div class="container-right__connect-item-avatar">
+                        <img src="${user.avatar}" alt="" class="container-right__connect-item-img">
+                    </div>
+                    <span class="container-right__connect-item-name">${user.userName}</span>
+                </a>
+            </li>
+            `
+        })
+    })
+</script>

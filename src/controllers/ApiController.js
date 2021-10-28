@@ -58,7 +58,6 @@ class ApiController{
         console.log('search post....', req.query.key)
         UserModel.find({})
         .then((data) =>{
-
             if(data){
                 // res.json(data)
                 let process_data = []
@@ -73,7 +72,7 @@ class ApiController{
          
                 })
                 console.log('process_data', process_data)
-
+            
                 res.render('search-result-page', {search_data: process_data})
             }
         })
@@ -103,7 +102,14 @@ class ApiController{
         UserModel.findOneAndUpdate({_id: req.params.uid}, {avatar: newAvatar}, ()=>{
             console.log('Thanh cong')
         })
-        res.redirect('/profile/me')
+        res.redirect(`/profile/${req.params.uid}`)
+    }
+
+    GetAllUser(req,res){
+        UserModel.find({})
+        .then(data=>{
+            res.json(data)
+        })
     }
 }
 module.exports = new ApiController

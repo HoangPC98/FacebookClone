@@ -1,7 +1,9 @@
 
 // Get Data User user_logined
 
-fetch(`/get-data-user-logined/${dataUserId}`)
+var dataUserLogin
+
+fetch(`/get-data-user/${Json_cookie.userId}`)
 .then(response => {
     return response.json()
 })
@@ -86,7 +88,7 @@ function RunMainJS(){
 
     document.querySelector('.link-profile').href = `profile/${dataUserLogin.uid}`
     $('.user-name-text-logined').html(dataUserLogin.userName);
-    document.querySelector('.avatar-img-logined')
+    
     // document.querySelector('.user-name-text').html(dataUserLogin.userName);
 
     // fetch API Posts
@@ -154,7 +156,7 @@ function RunMainJS(){
                          </div>
                      </div>
                  </div>
-                 <div class="newsfeed__info-setting more-dots">
+                 <div class="newsfeed__info-setting more-dots" style="display : ${item.uid === dataUserLogin.uid ? 'flex' : 'none'}">
                      <i class="fas fa-ellipsis-h"></i>
                      <ul class="newsfeed__info-setting-list" >
                          <li class="newsfeed__info-setting-item">
@@ -335,6 +337,7 @@ function RunMainJS(){
 
 
 
+
         // Click to the Show Hide Comment
         $('.show-hide-cmt').click(async function (e) {
 
@@ -368,9 +371,11 @@ function RunMainJS(){
                         allComment +=
                             `<div class="commented-box__item">
                          <div class="commented-box__item-user">
+                            <a class="link-profile" href="/profile/${comment_item.uid}">
                              <div class="commented-box__item-avatar">
-                                 <img src="${comment_item.avatar}"  alt="">
+                                 <img class="commented-box__item-avatar" src="${comment_item.avatar}"  alt="">
                              </div>
+                             </a>
                              <div class="commented-box__item-info">
                                  <div class="wrap">
                                      <div class="comented-box__item-content">
@@ -426,9 +431,64 @@ function RunMainJS(){
         //         })
 
         // }
-        // Click Send COmment
-        $('.item-post').click(function (e) {
 
+        // Close Overlay button
+
+        document.querySelectorAll('.post-box__head-close.close-box').forEach(close_btn => {
+            close_btn.onclick = () => {
+                document.querySelectorAll('.overplay').forEach(overlay => {
+                    overlay.style.display = 'none';
+                })
+            }
+        })
+        
+        // Click Send COmment
+        document.querySelector('.item-post').onclick = function (e) {
+
+            // Hide Show More Post Option
+            console.log('target', e.target)
+            if(e.target.classList.contains('more-dots') || e.target.parentElement.classList.contains('more-dots')){
+                let moreBtn = e.target.closest('.more-dots')
+                let moreList = moreBtn.querySelector('.newsfeed__info-setting-list')
+                console.log('morelist', moreList)
+                moreList.classList.toggle('active')
+                
+                // Delete Post btn
+                console.log('2nd....', e.target)
+                moreList.querySelector('.newsfeed__info-setting-item.delete-post').onclick = function (e){
+                    document.querySelector('.modal-delete').style.display = 'block'
+                    $('.delete-post-now').click(function(){
+                        console.log('POSTCLIKED', getPostId(e.target))
+                        document.querySelector('.modal-delete').style.display = 'none'
+                        fetch(`/delete-post/${getPostId(e.target).id}`)
+                        .then(result => {
+                            if(result)
+                                window.location.href='/home'
+                        })
+                        
+                    })
+                }
+    
+                 moreList.querySelector('.edit-post').onclick = function (e){
+                    console.log('POST EDIT...', getPostId(e.target).id) 
+                    let overlay_editpost = document.querySelector('.overplay.edit-post')
+                    overlay_editpost.style.display = 'block'
+                    let postId_Clicked = getPostId(e.target).id
+                    posts_data.map(post_item=>{
+                        if(post_item._id == postId_Clicked){
+                            overlay_editpost.querySelector('.post-box__content-textarea').value = post_item.content
+                            overlay_editpost.querySelector('.img-preview').src = post_item.img
+                        }
+                    })
+    
+                     // Submit Edit Post
+                    document.querySelector('.form-submit-edit-post').onsubmit = function () {
+                        this.action = `/edit-post/${postId_Clicked}`
+                        this.method = 'post'
+                    }
+                }
+            }
+           
             let PostItemClicked = getPostId(e.target)
             let InputElementOnInputing = PostItemClicked.querySelector('.newsfeed__comment-input')
 
@@ -461,11 +521,7 @@ function RunMainJS(){
                 }
                 FetchPostData('/post-comment', commentData)
             }
-        })
-
-
-
-
+        }
 
 
         postDataClicked = {}
@@ -498,12 +554,14 @@ function RunMainJS(){
 
                             userItem += `
                              <li class="container-right__connect-item flex-roww">
+                                <a href="/profile/${data_item.uid}" class="link-profile a-non-decor">
                                  <div class="left-section flex-roww">
                                      <span class="container-right__connect-item-avatar">
                                          <img src="${data_item.avatar}" alt="" class="container-right__connect-item-img">
                                      </span>
                                      <span class="container-right__connect-item-name">${data_item.userName}</span>
                                  </div>
+                                 </a>
                                  <button type="button" class="btn btn-active" style="font-size:14px">Thêm bạn bè</button>
                              </li>
                              `
@@ -603,17 +661,6 @@ function RunMainJS(){
     $('.avt posts__new-post-img nav-wall').src = Json_cookie.avatar
     document.querySelector('#avatar-postnew').src = Json_cookie.avatar
 
-    // Post New OVERLAY
-
-   
-    // document.querySelector('.post-box__info-name.full-name').innerHTML = Json_cookie.userName
-    // document.querySelector('#avatar-postnew-overlay').src = Json_cookie.avatar
- 
-
-  
-
-
-
 
     function getCookie(cName) {
         const name = cName + "=";
@@ -627,9 +674,15 @@ function RunMainJS(){
     }
 
 
-   
+   // SHow Hide Option Post
 
-    console.log('DATA USER LOGINED AVATAR...............', dataUserLogin)
+   $('.newsfeed__info-setting.more-dots').click(function(){
+    console.log('DATA USER LOGINED AVATAR................')
+
+        document.querySelector('.newsfeed__info-setting-list').classList.add('active');
+   })
+
+    console.log('DATA USER LOGINED AVATAR................', dataUserLogin)
     // finally
     document.querySelectorAll('.avatar-img-logined').forEach(img => {
         img.src = dataUserLogin.avatar

@@ -22,8 +22,7 @@
     var cookie_logined = getCookie('user_logined')   
     var Json_cookie = JSON.parse(cookie_logined)
     console.log('cookie login...',Json_cookie)
-    var dataUserId = Json_cookie.userId
-    var dataUserLogin
+    dataUserId = Json_cookie.userId
 
     var cookie_profile = getCookie('data_profile')
     cookie_profile = JSON.parse(cookie_profile)

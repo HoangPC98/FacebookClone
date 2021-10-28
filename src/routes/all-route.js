@@ -73,8 +73,9 @@ function AllRoute(app){
 
     app.post('/post-comment', PostController.PostComment)
 
+    app.post('/edit-post/:pid', upload.single('editimg'), PostController.EditPost)
+
     // app.post('/get-data-user-logined', ApiController.GetDataUserLogined)
-    app.get('/get-data-user-logined/:uid', ApiController.GetDataUserLogined)
 
 
     app.post('/change-avt/:uid', upload.single('input_upload_avt'), ApiController.ChangeAvt)
@@ -85,10 +86,14 @@ function AllRoute(app){
 
     app.get('/search', ApiController.GetSearch)
 
+    app.get('/get-all-user', ApiController.GetAllUser)
 
+    app.get('/delete-post/:pid', PostController.DeletePost)
     // Call API to Get data
+
+    app.get('/get-data-user/:uid', ApiController.GetDataUserLogined)
     app.get('/api/all-posts', ApiController.GetAllPosts)
-    app.get('/api/get-user-logined-posts/:uid', ApiController.GetUserLoginedPosts)
+    app.get('/get-user-posts/:uid', ApiController.GetUserLoginedPosts)
     app.get('/api/get-user-display', ApiController.GetUserDisplay)
     app.get('/api/get-comments/:postid', ApiController.GetCommentViaPostId)
     
